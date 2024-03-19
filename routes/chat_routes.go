@@ -8,7 +8,7 @@ import (
 
 func RegisterUserRoutes(router *mux.Router) {
 
-	router.HandleFunc("/chats", func(writer http.ResponseWriter, request *http.Request) {
+	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Write([]byte("Welcome to Astra AI Server"))
 	}).Methods(http.MethodGet)
 	router.HandleFunc("/chats", controllers.GetAllChats).Methods(http.MethodGet)
