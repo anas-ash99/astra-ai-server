@@ -17,7 +17,10 @@ func main() {
 
 	routes.RegisterUserRoutes(router)
 	err := http.ListenAndServe("0.0.0.0:"+port, router)
+	fmt.Print(err)
 	if err != nil {
 		fmt.Print("Serer running on port: " + port)
+	} else {
+		fmt.Print(err)
 	}
 }

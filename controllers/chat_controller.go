@@ -4,7 +4,10 @@ import (
 	"astra-ai-server/models"
 	"encoding/json"
 	"github.com/google/uuid"
+	"io/ioutil"
+	_ "io/ioutil"
 	"net/http"
+	"os"
 )
 
 func GetAllChats(w http.ResponseWriter, r *http.Request) {
@@ -38,4 +41,19 @@ func CreateNewChat(w http.ResponseWriter, r *http.Request) {
 	// Respond with success (usually a 201 Created status)
 	w.WriteHeader(http.StatusCreated)
 	_ = json.NewEncoder(w).Encode(newChat)
+}
+
+func WelcomeHandler(w http.ResponseWriter, r *http.Request) {
+
+	wd, err := os.Getwd()                      //retrieves the current working directory path.
+	filePath := wd + "/templates/welcome.html" // Adjust for your directory
+	htmlData, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		// Handle error reading the file
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html") // Set the content type
+	w.Write(htmlData)                           // Send the HTML content
 }
