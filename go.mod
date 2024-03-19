@@ -1,4 +1,4 @@
-module astra-ai-server
+module github.com/anas-ash099/astra-ai-server
 
 go 1.21
 
